@@ -5,7 +5,7 @@
         <a href="https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html">
             <img src="https://img.shields.io/badge/Java-17+-red?logo=java&logoWidth=30" alt="Java" height="20">
         </a>
-        <a href="https://spring.io/projects/spring-boot">
+        <a href="https://spring.io/projects/spring-framework">
             <img src="https://img.shields.io/badge/Spring_Framework-6.2.8-green?logo=spring&logoWidth=30" alt="Spring" height="20">
         </a>
         <a href="https://spring.io/projects/spring-boot">
