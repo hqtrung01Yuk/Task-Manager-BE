@@ -1,7 +1,5 @@
 ## Back-end Task Manager Project
 
----
-
 <div align="center">
     <p>
         <a href="https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html">
