@@ -6,16 +6,25 @@
             <img src="https://img.shields.io/badge/Java-17+-red?logo=java&logoWidth=30" alt="Java" height="20">
         </a>
         <a href="https://spring.io/projects/spring-framework">
-            <img src="https://img.shields.io/badge/Spring_Framework-6.2.8-green?logo=spring&logoWidth=30" alt="Spring" height="20">
+            <img src="https://img.shields.io/badge/Spring_Framework-6.2.8-green?logo=spring&logoWidth=30" alt="Spring Framework" height="20">
         </a>
         <a href="https://spring.io/projects/spring-boot">
             <img src="https://img.shields.io/badge/Spring_Boot-3.5.3-green?logo=springboot&logoWidth=30" alt="Spring Boot" height="20">
         </a>
+        <a href="https://spring.io/projects/spring-data">
+            <img src="https://img.shields.io/badge/Spring_Data-2025.0.1-green?logo=spring-data.svg&logoColor=white" alt="Spring Data" height="20">
+        </a>
         <a href="https://spring.io/projects/spring-security">
             <img src="https://img.shields.io/badge/Spring_Security-6.5.1-green?logo=spring-security&logoWidth=30" alt="Spring Security" height="20">
         </a>
-        <a>
+        <a href="https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/jwt.html">
             <img src="https://img.shields.io/badge/JWT-0.12.5-orange?logo=jsonwebtokens&logoWidth=30" alt="JWT" height="20">
+        </a>
+        <a href="https://mariadb.org/">
+            <img src="https://img.shields.io/badge/MariaDB-10.4.24-c0765a?logo=MariaDB&logoWidth=30" alt="JWT" height="20">
+        </a>
+        <a href="https://dotenvx.com/">
+            <img src="https://img.shields.io/badge/.env-20.6.0-yellow?logo=.ENV&logoWidth=30" alt="JWT" height="20">
         </a>
     </p>
 </div>
