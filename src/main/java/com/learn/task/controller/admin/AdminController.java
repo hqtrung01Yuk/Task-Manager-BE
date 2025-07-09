@@ -24,7 +24,7 @@ public class AdminController {
         return ResponseEntity.ok(adminService.getUsers());
     }
 
-    @PostMapping("/tasks")
+    @PostMapping("/task")
     public ResponseEntity<TaskDto> createTask(@RequestBody TaskDto taskDto) {
         TaskDto createdTask = adminService.createTask(taskDto);
         if (createdTask == null) {
@@ -32,5 +32,10 @@ public class AdminController {
         }
 
         return ResponseEntity.status(HttpStatus.CREATED).body(createdTask);
+    }
+
+    @GetMapping("/tasks")
+    public ResponseEntity<?> getAllTask() {
+        return ResponseEntity.ok(adminService.getAllTask());
     }
 }
