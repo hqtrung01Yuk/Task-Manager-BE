@@ -35,9 +35,11 @@ public class Task {
     public TaskDto getTaskDto() {
         TaskDto taskDto = new TaskDto();
         taskDto.setId(id);
+        taskDto.setTitle(title);
         taskDto.setDescription(description);
         taskDto.setDueDate(dueDate);
         taskDto.setPriority(priority);
+        taskDto.setTaskStatus(taskStatus);
         taskDto.setEmployeeId(user.getId());
         taskDto.setEmployeeName(user.getName());
         return taskDto;

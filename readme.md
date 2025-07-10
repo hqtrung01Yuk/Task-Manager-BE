@@ -3,7 +3,7 @@
 <div align="center">
     <p>
         <a href="https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html">
-            <img src="https://img.shields.io/badge/Java-17+-red?logo=java&logoWidth=30" alt="Java" height="20">
+           <img src="https://img.shields.io/badge/Java-17-%23ED8B00.svg?logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iNjAiPjxwYXRoIGQ9Ik0xNy45NTYgNDIuNTYycy0xLjc2NyAxLjA3NSAxLjIzIDEuMzgzYzMuNi40NiA1LjUzLjM4NCA5LjUyNC0uMzg0IDAgMCAxLjA3NS42OSAyLjUzNSAxLjIzLTguOTg3IDMuODQtMjAuMzU0LS4yMy0xMy4yODgtMi4yMjd6bS0xLjE1Mi00Ljk5MnMtMS45MiAxLjQ2IDEuMDc1IDEuNzY3YzMuOTE3LjM4NCA3IC40NiAxMi4yOS0uNjE0IDAgMCAuNjkuNzY4IDEuODQzIDEuMTUyLTEwLjgzIDMuMjI2LTIyLjk2Ni4zMDctMTUuMjA4LTIuMzA0em0yMS4yIDguNzU2czEuMzA2IDEuMDc1LTEuNDYgMS45MmMtNS4xNDYgMS41MzYtMjEuNTgzIDEuOTk3LTI2LjE5MiAwLTEuNjEzLS42OSAxLjQ2LTEuNyAyLjQ1OC0xLjg0MyAxLS4yMyAxLjUzNi0uMjMgMS41MzYtLjIzLTEuNzY2LTEuMjMtMTEuNzUyIDIuNTM1LTUuMDcgMy42IDE4LjM1NyAyLjk5NSAzMy40ODgtMS4zMDYgMjguNzI2LTMuNDU2ek0xOC44IDMyLjM0N3MtOC4zNzIgMS45OTctMi45OTYgMi42ODhjMi4zMDQuMzA3IDYuODM2LjIzIDExLjA2LS4wNzcgMy40NTYtLjMwNyA2LjkxMy0uOTIyIDYuOTEzLS45MjJzLTEuMjMuNTM4LTIuMDc0IDEuMDc1Yy04LjUyNiAyLjIyNy0yNC44ODYgMS4yMy0yMC4yLTEuMDc1IDMuOTk0LTEuOTIgNy4yOTctMS43IDcuMjk3LTEuN3ptMTQuOTc4IDguMzcyYzguNjAyLTQuNDU1IDQuNjA4LTguNzU2IDEuODQzLTguMjE4LS42OS4xNTQtMSAuMzA3LTEgLjMwN3MuMjMtLjQ2Ljc2OC0uNjE0YzUuNDUzLTEuOTIgOS43NTUgNS43Ni0xLjc2NyA4Ljc1NiAwIDAgLjA3Ny0uMDc3LjE1NC0uMjN6TTE5LjY0NiA1Mi44NTRjOC4yOTUuNTM4IDIwLjk3LS4zMDcgMjEuMjc2LTQuMjI0IDAgMC0uNjE0IDEuNTM2LTYuODM2IDIuNjg4LTcuMDY2IDEuMzA2LTE1LjgyMiAxLjE1Mi0yMC45Ny4zMDcgMCAwIDEuMDc1LjkyMiA2LjUzIDEuMjN6IiBmaWxsPSIjNGU3ODk2Ii8+PHBhdGggZD0iTTI4LjU1NSA3czQuNzYyIDQuODQtNC41MzIgMTIuMTM2Yy03LjQ1IDUuOTE0LTEuNyA5LjI5NCAwIDEzLjEzNC00LjM3OC0zLjkxNy03LjUyNy03LjM3My01LjM3Ny0xMC42IDMuMTUtNC43NjIgMTEuODI4LTcuMDY2IDkuOTA4LTE0LjY3em0tMi40NTggMjIuMDQ0YzIuMjI3IDIuNTM1LS42MTUgNC44NC0uNjE1IDQuODRzNS42ODQtMi45MiAzLjA3Mi02LjUzYy0yLjM4LTMuNDU2LTQuMjI0LTUuMTQ2IDUuNzYtMTAuOTA3IDAgMC0xNS43NDYgMy45MTctOC4yMTggMTIuNTk2eiIgZmlsbD0iI2Y1ODIxOSIvPjxwYXRoIGQ9Ik03NS4zMTggMzguMTYyVjI2LjQ4NWMwLTIuOTgtMS42NjgtNS4wMDQtNS44MzgtNS4wMDQtMi4zODMgMC00LjQxLjU5Ni02LjE5NiAxLjMxbC41OTYgMi4xNDVjMS4zMS0uNDc3IDIuOTgtLjk1MyA0Ljc2Ni0uOTUzIDIuMjY0IDAgMy4zMzYuOTUzIDMuMzM2IDIuODZ2MS41NUg3MC44Yy01LjcyIDAtOC4zNCAyLjE0NS04LjM0IDUuNiAwIDIuODYgMS43ODcgNC41MjggNS4wMDQgNC41MjggMi4wMjYgMCAzLjU3NS0uOTUzIDUuMDA0LTIuMTQ1bC4yMzggMS43ODdoMi42MnpNNzEuOTggMzQuMzVjLTEuMTkgMS4wNzItMi41MDIgMS42NjgtMy42OTQgMS42NjgtMS41NSAwLTIuNTAyLS45NTMtMi41MDItMi42MnMuOTUzLTIuODYgNC43NjYtMi44NmgxLjQzdjMuODEzem0xNC41MzYgMy44MTNoLTQuMTdMNzcuMzQzIDIxLjg0aDMuNTc1bDMuMDk4IDEwLjAxLjcxNSAyLjk4YzEuNTUtNC4yOSAyLjc0LTguNjk4IDMuMjE3LTEyLjk4N2gzLjU3NGMtLjk1MyA1LjM2Mi0yLjYyIDExLjItNS4wMDQgMTYuMzIzem0xOS4zMDIgMFYyNi40ODVjMC0yLjk4LTEuNjY4LTUuMDA0LTUuODQtNS4wMDQtMi4zODMgMC00LjQwOC41OTYtNi4xOTYgMS4zMWwuNDc3IDIuMTQ1YzEuNDMtLjQ3NyAzLjA5OC0uOTUzIDQuODg1LS45NTMgMi4yNjQgMCAzLjMzNi45NTMgMy4zMzYgMi44NnYxLjU1aC0xLjE5Yy01LjcyIDAtOC4zNCAyLjE0NS04LjM0IDUuNiAwIDIuODYgMS42NjggNC41MjggNC44ODUgNC41MjggMi4xNDUgMCAzLjY5NC0uOTUzIDUuMTIzLTIuMTQ1bC4yMzggMS43ODdoMi42MnptLTMuMzM2LTMuODEzYy0xLjE5IDEuMDcyLTIuNTAyIDEuNjY4LTMuNjk0IDEuNjY4LTEuNTUgMC0yLjUwMi0uOTUzLTIuNTAyLTIuNjJzLjk1My0yLjg2IDQuNzY2LTIuODZoMS40M3YzLjgxM3ptLTQzLjcyOCA2LjU1M2MtLjk1MyAxLjQzLTIuMzgzIDIuNTAyLTQuMTcgMy4wOThsLTEuNTUtMS45MDZjMS4xOTItLjcxNSAyLjM4My0xLjc4NyAyLjg2LTIuNzQuNDc3LS44MzQuNTk2LTIuMDI2LjU5Ni00Ljc2NlYxNmgzLjU3NXYxOC4zNWMwIDMuNjk0LS4zNTggNS4xMjMtMS4zMSA2LjU1M3oiIGZpbGw9IiM0ZTc4OTYiLz48L3N2Zz4=&logoColor=white&logoSize=90" alt="Java" height="20">
         </a>
         <a href="https://spring.io/projects/spring-framework">
             <img src="https://img.shields.io/badge/Spring_Framework-6.2.8-green?logo=spring&logoWidth=30" alt="Spring Framework" height="20">
@@ -21,13 +21,16 @@
             <img src="https://img.shields.io/badge/Spring_Security-6.5.1-green?logo=spring-security&logoWidth=30" alt="Spring Security" height="20">
         </a>
         <a href="https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/jwt.html">
-            <img src="https://img.shields.io/badge/JWT-0.12.5-orange?logo=jsonwebtokens&logoWidth=30" alt="JWT" height="20">
+            <img src="https://img.shields.io/badge/JWT-0.12.5-orange?logo=jsonwebtokens&logoWidth=30&logoColor=orange" alt="JWT" height="20">
         </a>
         <a href="https://mariadb.org/">
-            <img src="https://img.shields.io/badge/MariaDB-10.4.24-c0765a?logo=MariaDB&logoWidth=30" alt="JWT" height="20">
+            <img src="https://img.shields.io/badge/MariaDB-10.4.32-c0765a?logo=MariaDB&logoWidth=30&logoColor=c0765a" alt="JWT" height="20">
         </a>
         <a href="https://dotenvx.com/">
             <img src="https://img.shields.io/badge/.env-20.6.0-yellow?logo=.ENV&logoWidth=30" alt="JWT" height="20">
+        </a>
+        <a href="https://www.postman.com/">
+            <img src="https://img.shields.io/badge/Postman-10.18.10-FF6C37?logo=postman&logoWidth=30&logoColor=FF6C37" alt="Postman" height="20">
         </a>
     </p>
 </div>
@@ -113,14 +116,14 @@ POST /api/auth/signup
 Body: { "name": "test", "username": "test", "password": "123456" }
 ```
 
-- Login (Get JWT)
+- **Login (Get JWT)**
 
 ```http
 POST /api/auth/login
 Body: { "username": "test", "password": "123456" }
 ```
 
-2. Access Protected Routes
+- **Access Protected Routes**
 
 ```http
 GET /api/products
