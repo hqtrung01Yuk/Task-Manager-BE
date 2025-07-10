@@ -126,7 +126,7 @@ Body: { "username": "test", "password": "123456" }
 - **Access Protected Routes**
 
 ```http
-GET /api/products
+GET /api/admin/**
 Headers: { "Authorization": "Bearer YOUR_JWT_TOKEN" }
 ```
 
