@@ -56,4 +56,9 @@ public class AdminServiceImpl implements AdminService {
                 .sorted(Comparator.comparing(Task::getDueDate).reversed()).map(Task::getTaskDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteTask(Long id) {
+        taskRepository.deleteById(id);
+    }
 }
