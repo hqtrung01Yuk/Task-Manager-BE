@@ -141,8 +141,8 @@ Content-Type: application/json
 }
 ```
 
-> **Response:**
->
+**Response:**
+
 > ```json
 >{  
 >   "Jwt": "YOUR_JWT_TOKEN",
@@ -184,7 +184,7 @@ Authorization: "Bearer YOUR_JWT_TOKEN"
 ```
 
 **Response Example (Success - 200 OK):**
->
+
 >```json
 >[
 >   {
@@ -209,6 +209,20 @@ Authorization: "Bearer YOUR_JWT_TOKEN"
 >   }
 >]
 > ```
+
+- **Delete By Id Task:**
+
+```http
+DELETE /api/admin/tasks/{id}
+Authorization: "Bearer YOUR_JWT_TOKEN"
+```
+
+- **Get By Id Task:**
+
+```http
+GET /api/admin/tasks/{id}
+Authorization: "Bearer YOUR_JWT_TOKEN"
+```
 
 ### Project Structure
 
