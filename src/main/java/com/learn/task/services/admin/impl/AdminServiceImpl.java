@@ -23,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 public class AdminServiceImpl implements AdminService {
     private final UserRepository userRepository;
     private final TaskRepository taskRepository;
-    private final static Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
 
     @Override
     public List<UserDto> getUsers() {
@@ -52,13 +52,40 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public List<TaskDto> getAllTask() {
-        return taskRepository.findAll().stream()
-                .sorted(Comparator.comparing(Task::getDueDate).reversed()).map(Task::getTaskDto)
-                .collect(Collectors.toList());
+        List<Task> tasks = taskRepository.findAll();
+
+        List<TaskDto> taskDtos =
+                tasks.stream().sorted(Comparator.comparing(Task::getDueDate).reversed())
+                        .map(Task::getTaskDto).collect(Collectors.toList());
+
+        logger.info("Total tasks fetched: {}", tasks.size());
+        logger.info("Total tasks after sorting and mapping: {}", taskDtos.size());
+
+        return taskDtos;
     }
 
     @Override
     public void deleteTask(Long id) {
+        logger.info("Attempting to delete task with id: {}", id);
+
+        if (!taskRepository.existsById(id)) {
+            logger.warn("Task with id {} does not exist. Skipping deletion.", id);
+            return;
+        }
+
         taskRepository.deleteById(id);
+        logger.info("Successfully deleted task with id: {}", id);
+    }
+
+    @Override
+    public TaskDto getById(Long id) {
+        logger.info("Getting task by id: {}", id);
+        return taskRepository.findById(id).map(task -> {
+            logger.info("Task found with id: {}", id);
+            return task.getTaskDto();
+        }).orElseThrow(() -> {
+            logger.warn("Task not found with id: {}", id);
+            return new EntityNotFoundException("Task not found with id: " + id);
+        });
     }
 }

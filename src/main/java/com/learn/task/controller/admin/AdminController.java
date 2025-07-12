@@ -1,5 +1,7 @@
 package com.learn.task.controller.admin;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,7 +28,7 @@ public class AdminController {
         return ResponseEntity.ok(adminService.getUsers());
     }
 
-    @PostMapping("/task")
+    @PostMapping("/create-task")
     public ResponseEntity<TaskDto> createTask(@RequestBody TaskDto taskDto) {
         TaskDto createdTask = adminService.createTask(taskDto);
         if (createdTask == null) {
@@ -34,6 +36,14 @@ public class AdminController {
         }
 
         return ResponseEntity.status(HttpStatus.CREATED).body(createdTask);
+    }
+
+    @PostMapping("/create-tasks")
+    public ResponseEntity<?> createTasks(@RequestBody List<TaskDto> taskList) {
+        List<TaskDto> createdTasks =
+                taskList.stream().map(adminService::createTask).collect(Collectors.toList());
+
+        return ResponseEntity.ok(createdTasks);
     }
 
     @GetMapping("/tasks")
@@ -45,5 +55,11 @@ public class AdminController {
     public ResponseEntity<Void> deleteTask(@PathVariable("id") Long id) {
         adminService.deleteTask(id);
         return ResponseEntity.ok(null);
+    }
+
+    @GetMapping("/task/{id}")
+    public ResponseEntity<TaskDto> getTaskById(@PathVariable("id") Long id) {
+
+        return ResponseEntity.ok(adminService.getById(id));
     }
 }

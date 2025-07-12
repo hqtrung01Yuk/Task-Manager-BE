@@ -3,13 +3,21 @@ package com.learn.task.bootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 import com.learn.task.entities.User;
 import com.learn.task.enums.UserRole;
 import com.learn.task.repositories.UserRepository;
 
+@Component
 public class DataInitializer implements CommandLineRunner {
+    @Value("${admin.email}")
+    private String adminEmail;
+    @Value("${admin.password}")
+    private String adminPassword;
+
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -26,13 +34,15 @@ public class DataInitializer implements CommandLineRunner {
         }
 
         logger.info("ADMIN user not found. Creating default admin account...");
+
         User admin = new User();
-        admin.setEmail("admin@test.com");
+        admin.setEmail(adminEmail);
         admin.setName("admin");
-        admin.setPassword(passwordEncoder.encode("123456"));
+        admin.setPassword(passwordEncoder.encode(adminPassword));
         admin.setUserRole(UserRole.ADMIN);
 
         userRepository.save(admin);
-        logger.info("Default ADMIN user created successfully.");
+
+        logger.info("Default ADMIN user created successfully with email: {}", adminEmail);
     }
 }
