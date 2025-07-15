@@ -14,4 +14,6 @@ public interface AdminService {
     void deleteTask(Long id);
 
     TaskDto getById(Long id);
+
+    TaskDto updateTask(Long id, TaskDto taskDto);
 }

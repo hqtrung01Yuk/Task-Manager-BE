@@ -2,6 +2,7 @@ package com.learn.task.services.admin.impl;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,7 +71,7 @@ public class AdminServiceImpl implements AdminService {
 
         if (!taskRepository.existsById(id)) {
             logger.warn("Task with id {} does not exist. Skipping deletion.", id);
-            return;
+            throw new EntityNotFoundException("Task not found with id: " + id);
         }
 
         taskRepository.deleteById(id);
@@ -87,5 +88,53 @@ public class AdminServiceImpl implements AdminService {
             logger.warn("Task not found with id: {}", id);
             return new EntityNotFoundException("Task not found with id: " + id);
         });
+    }
+
+    @Override
+    public TaskDto updateTask(Long id, TaskDto taskDto) {
+        logger.info("Updating task with id: {}", id);
+
+        return taskRepository.findById(id).map(task -> {
+            logger.info("Task found. Updating fields...");
+            task.setTitle(taskDto.getTitle());
+            task.setDescription(taskDto.getDescription());
+            task.setDueDate(taskDto.getDueDate());
+            task.setPriority(taskDto.getPriority());
+            if (taskDto.getTaskStatus() != null) {
+                task.setTaskStatus(mapstringToTaskStatus(taskDto.getTaskStatus().name()));
+            } else {
+                logger.warn("TaskStatus is null in DTO. Setting default to CANCELLED.");
+                task.setTaskStatus(TaskStatus.CANCELLED); // hoặc giữ nguyên status cũ nếu muốn
+            }
+
+            if (taskDto.getEmployeeId() != null) {
+                logger.info("Found employee id: " + taskDto.getEmployeeId());
+                userRepository.findById(taskDto.getEmployeeId()).ifPresentOrElse(task::setUser,
+                        () -> logger.warn(
+                                "Employee with id {} not found. Skipping employee assignment.",
+                                taskDto.getEmployeeId()));
+            } else {
+                logger.warn("EmployeeId is null in taskDto.");
+            }
+
+            // save to db
+            Task updatedTask = taskRepository.save(task);
+            logger.info("Task updated successfully with id: {}", updatedTask.getId());
+            return updatedTask;
+        }).map(Task::getTaskDto).orElseThrow(() -> {
+            logger.warn("Task not found with id: {}", id);
+            return new EntityNotFoundException("Task not found with id: " + id);
+        });
+    }
+
+    private TaskStatus mapstringToTaskStatus(String status) {
+        return switch (status) {
+            case "PENDING" -> TaskStatus.PENDING;
+            case "INPROCESS" -> TaskStatus.INPROCESS;
+            case "COMPLETED" -> TaskStatus.COMPLETED;
+            case "DEFERED" -> TaskStatus.DEFERED;
+            case "CANCELLED" -> TaskStatus.CANCELLED;
+            default -> TaskStatus.CANCELLED;
+        };
     }
 }
