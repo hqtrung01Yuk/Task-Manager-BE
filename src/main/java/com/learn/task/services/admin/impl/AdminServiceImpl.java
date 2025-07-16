@@ -137,4 +137,25 @@ public class AdminServiceImpl implements AdminService {
             default -> TaskStatus.CANCELLED;
         };
     }
+
+    @Override
+    public List<TaskDto> searchTaskByTitle(String title) {
+        try {
+            logger.info("Searching tasks with title containing: {}", title);
+
+            List<TaskDto> result = taskRepository.findAllByTitleContaining(title).stream()
+                    .peek(task -> logger.trace("Processing task: {} with due date: {}",
+                            task.getId(), task.getDueDate()))
+                    .sorted(Comparator.comparing(Task::getDueDate,
+                            Comparator.nullsLast(Comparator.reverseOrder())))
+                    .map(Task::getTaskDto).peek(dto -> logger.trace("Mapped to DTO: {}", dto))
+                    .collect(Collectors.toList());
+
+            logger.info("Returning {} sorted tasks", result.size());
+            return result;
+        } catch (Exception e) {
+            logger.error("Error occurred while searching tasks by title: " + title, e);
+            throw e;
+        }
+    }
 }
