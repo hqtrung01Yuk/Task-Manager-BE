@@ -141,9 +141,19 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public List<TaskDto> searchTaskByTitle(String title) {
         try {
-            logger.info("Searching tasks with title containing: {}", title);
+            logger.info("Searching tasks with title: '{}'", title);
 
-            List<TaskDto> result = taskRepository.findAllByTitleContaining(title).stream()
+            List<Task> tasks;
+
+            if (title == null || title.isBlank()) {
+                logger.info("Title is null or blank. Fetching all tasks...");
+                tasks = taskRepository.findAll();
+            } else {
+                logger.info("Fetching tasks with title containing: '{}'", title);
+                tasks = taskRepository.findAllByTitleContaining(title);
+            }
+
+            List<TaskDto> result = tasks.stream()
                     .peek(task -> logger.trace("Processing task: {} with due date: {}",
                             task.getId(), task.getDueDate()))
                     .sorted(Comparator.comparing(Task::getDueDate,
@@ -154,8 +164,9 @@ public class AdminServiceImpl implements AdminService {
             logger.info("Returning {} sorted tasks", result.size());
             return result;
         } catch (Exception e) {
-            logger.error("Error occurred while searching tasks by title: " + title, e);
+            logger.error("Error occurred while searching tasks by title: '{}'", title, e);
             throw e;
         }
     }
+
 }

@@ -4,11 +4,17 @@ import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import com.learn.task.entities.User;
+import com.learn.task.repositories.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -22,10 +28,12 @@ import io.jsonwebtoken.security.Keys;
 public class JwtUtil {
     private final JwtProperties jwtProperties;
     private static final Logger logger = LoggerFactory.getLogger(JwtUtil.class);
+    private final UserRepository userRepository;
 
     // Constructor dependency injection of JWT configuration (secret key & expiration)
-    public JwtUtil(JwtProperties jwtProperties) {
+    public JwtUtil(JwtProperties jwtProperties, UserRepository userRepository) {
         this.jwtProperties = jwtProperties;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -112,5 +120,30 @@ public class JwtUtil {
      */
     private Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
+    }
+
+    public User getLoggedInUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated()) {
+            logger.warn("Authentication is null or not authenticated.");
+            return null;
+        }
+
+        Object principal = authentication.getPrincipal();
+        if (principal instanceof UserDetails userDetails) {
+            String email = userDetails.getUsername(); // lấy email từ principal
+            Optional<User> optionalUser = userRepository.findFirstByEmail(email);
+
+            if (optionalUser.isPresent()) {
+                logger.info("User found in database with email: {}", email);
+                return optionalUser.get();
+            } else {
+                logger.error("User with email {} not found in database!", email);
+                throw new UsernameNotFoundException("User not found in database.");
+            }
+        } else {
+            logger.warn("Principal is not instance of UserDetails. Principal = {}", principal);
+            return null;
+        }
     }
 }
