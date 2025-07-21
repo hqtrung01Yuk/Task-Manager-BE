@@ -1,29 +1,36 @@
 package com.learn.task.services.admin.impl;
 
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import com.learn.task.dto.CommentDto;
 import com.learn.task.dto.TaskDto;
 import com.learn.task.dto.UserDto;
+import com.learn.task.entities.Comment;
 import com.learn.task.entities.Task;
 import com.learn.task.entities.User;
 import com.learn.task.enums.TaskStatus;
 import com.learn.task.enums.UserRole;
+import com.learn.task.repositories.CommentRepository;
 import com.learn.task.repositories.TaskRepository;
 import com.learn.task.repositories.UserRepository;
 import com.learn.task.services.admin.AdminService;
+import com.learn.task.services.jwt.JwtUtil;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class AdminServiceImpl implements AdminService {
+    private final JwtUtil jwtUtil;
     private final UserRepository userRepository;
     private final TaskRepository taskRepository;
+    private final CommentRepository commentRepository;
     private static final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
 
     @Override
@@ -167,6 +174,33 @@ public class AdminServiceImpl implements AdminService {
             logger.error("Error occurred while searching tasks by title: '{}'", title, e);
             throw e;
         }
+    }
+
+    @Override
+    public CommentDto createComment(Long taskId, String content) {
+        User user = jwtUtil.getLoggedInUser();
+        if (user == null) {
+            logger.warn("Cannot create comment: No user is currently logged in.");
+            return null;
+        }
+
+        return taskRepository.findById(taskId).map(task -> {
+            logger.info("Creating comment for taskId: {} by user: {}", taskId, user.getUsername());
+
+            Comment comment = new Comment();
+            comment.setCreateAt(new Date());
+            comment.setCreatedBy(user);
+            comment.setUser(user);
+            comment.setContent(content);
+            comment.setTask(task);
+
+            Comment savedComment = commentRepository.save(comment);
+            logger.info("Comment created successfully with id: {}", savedComment.getId());
+            return savedComment;
+        }).map(Comment::toDto).orElseGet(() -> {
+            logger.warn("Failed to create comment: Task with id {} not found.", taskId);
+            return null;
+        });
     }
 
 }
