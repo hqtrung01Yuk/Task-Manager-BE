@@ -5,4 +5,6 @@ import com.learn.task.dto.TaskDto;
 
 public interface EmployeeService {
     List<TaskDto> getTasksByUserId();
+
+    TaskDto updateTask(Long id, String status);
 }
