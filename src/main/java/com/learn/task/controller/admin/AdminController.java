@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.learn.task.dto.CommentDto;
 import com.learn.task.dto.TaskDto;
 import com.learn.task.services.admin.AdminService;
 import jakarta.persistence.EntityNotFoundException;
@@ -86,5 +87,16 @@ public class AdminController {
     public ResponseEntity<List<TaskDto>> searchTitle(
             @RequestParam(value = "title", required = false) String title) {
         return ResponseEntity.ok(adminService.searchTaskByTitle(title));
+    }
+
+    @PostMapping("/task/comment/{taskId}")
+    public ResponseEntity<CommentDto> createComment(@PathVariable("taskId") Long taskId,
+            @RequestParam("content") String content) {
+        CommentDto createdComment = adminService.createComment(taskId, content);
+        if (createdComment == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdComment);
     }
 }
