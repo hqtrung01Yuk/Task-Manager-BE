@@ -203,4 +203,9 @@ public class AdminServiceImpl implements AdminService {
         });
     }
 
+    @Override
+    public List<CommentDto> getCommentByTaskId(Long taskId) {
+        return commentRepository.findAllByTaskId(taskId).stream().map(Comment::toDto)
+                .collect(Collectors.toList());
+    }
 }

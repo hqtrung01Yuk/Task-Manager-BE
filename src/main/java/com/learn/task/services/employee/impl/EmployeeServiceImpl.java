@@ -1,16 +1,20 @@
 package com.learn.task.services.employee.impl;
 
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import com.learn.task.dto.CommentDto;
 import com.learn.task.dto.TaskDto;
+import com.learn.task.entities.Comment;
 import com.learn.task.entities.Task;
 import com.learn.task.entities.User;
 import com.learn.task.enums.TaskStatus;
+import com.learn.task.repositories.CommentRepository;
 import com.learn.task.repositories.TaskRepository;
 import com.learn.task.services.employee.EmployeeService;
 import com.learn.task.services.jwt.JwtUtil;
@@ -22,6 +26,7 @@ import lombok.RequiredArgsConstructor;
 public class EmployeeServiceImpl implements EmployeeService {
     private final TaskRepository taskRepository;
     private final JwtUtil jwtUtil;
+    private final CommentRepository commentRepository;
     private static final Logger logger = LoggerFactory.getLogger(EmployeeServiceImpl.class);
 
     @Override
@@ -69,5 +74,50 @@ public class EmployeeServiceImpl implements EmployeeService {
             case "CANCELLED" -> TaskStatus.CANCELLED;
             default -> TaskStatus.CANCELLED;
         };
+    }
+
+    @Override
+    public TaskDto getById(Long id) {
+        logger.info("Getting task by id: {}", id);
+        return taskRepository.findById(id).map(task -> {
+            logger.info("Task found with id: {}", id);
+            return task.getTaskDto();
+        }).orElseThrow(() -> {
+            logger.warn("Task not found with id: {}", id);
+            return new EntityNotFoundException("Task not found with id: " + id);
+        });
+    }
+
+    @Override
+    public CommentDto createComment(Long taskId, String content) {
+        User user = jwtUtil.getLoggedInUser();
+        if (user == null) {
+            logger.warn("Cannot create comment: No user is currently logged in.");
+            return null;
+        }
+
+        return taskRepository.findById(taskId).map(task -> {
+            logger.info("Creating comment for taskId: {} by user: {}", taskId, user.getUsername());
+
+            Comment comment = new Comment();
+            comment.setCreateAt(new Date());
+            comment.setCreatedBy(user);
+            comment.setUser(user);
+            comment.setContent(content);
+            comment.setTask(task);
+
+            Comment savedComment = commentRepository.save(comment);
+            logger.info("Comment created successfully with id: {}", savedComment.getId());
+            return savedComment;
+        }).map(Comment::toDto).orElseGet(() -> {
+            logger.warn("Failed to create comment: Task with id {} not found.", taskId);
+            return null;
+        });
+    }
+
+    @Override
+    public List<CommentDto> getCommentByTaskId(Long taskId) {
+        return commentRepository.findAllByTaskId(taskId).stream().map(Comment::toDto)
+                .collect(Collectors.toList());
     }
 }
