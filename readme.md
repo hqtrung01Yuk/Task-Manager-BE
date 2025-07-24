@@ -224,6 +224,27 @@ GET /api/admin/tasks/{id}
 Authorization: "Bearer YOUR_JWT_TOKEN"
 ```
 
+- **Search Tasks:**
+
+```http
+GET /api/admin/tasks?title=SEARCH
+Authorization: "Bearer YOUR_JWT_TOKEN"
+```
+
+- **Task comment:**
+
+```http
+POST /api/admin/comment/{taskId}
+Authorization: "Bearer YOUR_JWT_TOKEN"
+```
+
+- **Get comment task by id:**
+
+```http
+GET /api/admin/comment/{taskId}
+Authorization: "Bearer YOUR_JWT_TOKEN"
+```
+
 ### Project Structure
 
 ```tree
